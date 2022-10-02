@@ -1,3 +1,5 @@
+// code taken from https://github.com/SebLague/Solar-System
+
 float4 triplanar(float3 vertPos, float3 normal, float scale, sampler2D tex) {
 
     // Calculate triplanar coordinates

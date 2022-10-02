@@ -1,10 +1,4 @@
-
 #include "/SimplexNoise.cginc"
-
-
-
-
-
 
 
 float ridge(float h, float power, float offset) {
@@ -72,49 +66,6 @@ float terracedNoise(float3 pos ,  float exponent, float4 params[3]) {
 
 }
 
-
-float ridgidNoise(float3 pos, float power, float4 params[3]) {
-    // Extract parameters for readability
-    int numLayers = int(params[0].x);
-    float persistence = params[0].y;
-    float lacunarity = params[0].z;
-    float freq = params[0].w;
-    float amp = params[1].x;
-
-    float3 offset3D = float3(params[1].z, params[1].w, params[2].x);
-
-    // Sum up noise layers
-    float noiseSum = 0;
-    float amplitude = 1;
-    float frequency = freq;
-    float ridgeWeight = 1;
-
-    for (int i = 0; i < numLayers; i++) {
-        float noiseVal = 1 - abs(snoise(pos * frequency + offset3D));
-        noiseVal = pow(abs(noiseVal), power);
-        ridgeWeight = saturate(noiseVal);
-
-        noiseSum += noiseVal * amplitude;
-        amplitude *= persistence;
-        frequency *= lacunarity;
-    }
-    return noiseSum * amp; 
-}
-
-
-float smoothedRidgidNoise(float3 pos, float power, float4 params[3]) {
-    float3 sphereNormal = normalize(pos);
-    float3 axisA = cross(sphereNormal, float3(0, 1, 0));
-    float3 axisB = cross(sphereNormal, axisA);
-
-    float offsetDst = params[2].w * 0.01;
-    float sample0 = ridgidNoise(pos, power, params);
-    float sample1 = ridgidNoise(pos - axisA * offsetDst,power, params);
-    float sample2 = ridgidNoise(pos + axisA * offsetDst, power, params);
-    float sample3 = ridgidNoise(pos - axisB * offsetDst, power, params);
-    float sample4 = ridgidNoise(pos + axisB * offsetDst, power, params);
-    return (sample0 + sample1 + sample2 + sample3 + sample4) / 5;
-}
 
 
 

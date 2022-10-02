@@ -54,6 +54,10 @@ public class SphereFace
 
     protected int[] GenerateTriangles()
     {
+
+        // cube-generation code from https://github.com/SebLague/Procedural-Planets
+
+
         triangles = new int[(resolution - 1) * (resolution - 1) * 6];
         int triIndex = 0;
         for (int y = 0; y < resolution; y++)

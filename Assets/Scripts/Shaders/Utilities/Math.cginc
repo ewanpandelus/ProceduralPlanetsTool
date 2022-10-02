@@ -1,3 +1,6 @@
+
+// code from https://github.com/SebLague/Solar-System
+
 static const float PI = 3.14159265359;
 static const float TAU = PI * 2;
 static const float maxFloat = 3.402823466e+38;
