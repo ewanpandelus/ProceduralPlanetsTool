@@ -1,0 +1,75 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+#include "../../Utilities/NoiseFunctions.cginc"
+#include "../../Utilities/Math.cginc"
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+
+RWStructuredBuffer<float3> vertices;
+RWStructuredBuffer<float> minMaxHeights;
+
+
+uint numVertices;
+
+
+
+float oceanFloorMultiplier;
+float mountainBlend;
+float power;
+
+float4 noiseParams1[3];
+float4 noiseParams2[3];
+float4 noiseParams3[3];
+float4 noiseParams4[3];
+
+
+
+
+
+[numthreads(512,1,1)]
+void CSMain (uint id : SV_DispatchThreadID)
+{
+	if (id >= numVertices) {
+		return;
+	}
+
+	float3 pos = vertices[id];
+
+	
+
+	float mask = Blend(0, mountainBlend, simplexNoise(pos,   noiseParams1));
+	float continentShape =  ridgedMF(pos, power, noiseParams2);
+
+
+	
+
+
+
+
+	float mountainNoise = ridgedMF(pos, power,  noiseParams3);
+
+	//float shapedNoise = (mask * (continentShape + mountainNoise));
+
+
+	// Calculate final height
+	float finalHeight = 1 + continentShape + mountainNoise;
+	
+	
+
+	
+	// Set terrain data
+
+	vertices[id] *= finalHeight * oceanFloorMultiplier;
+
+
+	if (length(vertices[id]) < minMaxHeights[0]) {
+		minMaxHeights[0] = length(vertices[id]);
+	}
+
+	if (length(vertices[id]) > minMaxHeights[1]) {
+		minMaxHeights[1] = length(vertices[id]);
+	}
+	
+
+}

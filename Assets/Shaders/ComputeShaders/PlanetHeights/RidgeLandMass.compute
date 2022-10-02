@@ -1,0 +1,80 @@
+
+#pragma kernel CSMain
+#include "../../Utilities/NoiseFunctions.cginc"
+#include "../../Utilities/Math.cginc"
+
+
+
+RWStructuredBuffer<float3> vertices;
+RWStructuredBuffer<float> minMaxHeights;
+
+
+uint numVertices;
+
+
+
+float oceanFloorDepth;
+float oceanFloorMultiplier;
+
+float mountainBlend;
+float power; 
+
+
+float4 noiseParams1[3];
+float4 noiseParams2[3];
+float4 noiseParams3[3];
+float4 noiseParams4[3];
+
+
+
+
+
+[numthreads(512, 1, 1)]
+void CSMain(uint id : SV_DispatchThreadID)
+{
+	if (id >= numVertices) {
+		return;
+	}
+
+	float3 pos = vertices[id];
+
+	float mask = Blend(0, mountainBlend, simplexNoise(pos, noiseParams1));
+	float continentShape = ridgedMF(pos, power, noiseParams1);
+
+
+
+
+
+
+
+	float mountainNoise = ridgedMF(pos, power, noiseParams3);
+	float mountainNoise2 = ridgedMF(pos, power, noiseParams2);
+
+
+	float shapedNoise = ( (continentShape * mountainNoise));
+
+
+	// Calculate final height
+	float finalHeight = 1 + continentShape+ (mountainNoise2*continentShape);
+
+
+
+	if (finalHeight < 1) 
+	{
+		finalHeight = lerp(finalHeight, 1, oceanFloorMultiplier);
+	}
+
+	finalHeight *= mountainBlend;
+
+
+	// Set terrain data
+
+	vertices[id] *= finalHeight;
+	if (length(vertices[id]) < minMaxHeights[0]) {
+		minMaxHeights[0] = length(vertices[id]);
+	}
+	if (length(vertices[id]) > minMaxHeights[1]) {
+		minMaxHeights[1] = length(vertices[id]);
+	}
+
+}

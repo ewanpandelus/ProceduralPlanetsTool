@@ -1,0 +1,43 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+#include "../../Utilities/NoiseFunctions.cginc"
+#include "../../Utilities/Math.cginc"
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+
+
+RWStructuredBuffer<float> noiseValues;
+StructuredBuffer<float3> vertices;
+RWStructuredBuffer<float> minMaxValues;
+
+uint numVertices;
+
+float power;
+
+float4 noiseParams1[3];
+float4 noiseParams2[3];
+float4 noiseParams3[3];
+
+
+
+
+[numthreads(512, 1, 1)]
+void CSMain(uint id : SV_DispatchThreadID)
+{
+	if (id >= numVertices) {
+		return;
+	}
+
+	float3 pos = vertices[id];
+
+	float noiseVal =(ridgedMF(pos, 2, noiseParams2));
+
+	if (noiseVal < minMaxValues[0]) {
+		minMaxValues[0] = noiseVal;
+	}
+	if (noiseVal > minMaxValues[1]) {
+		minMaxValues[1] = noiseVal;
+	}
+
+	noiseValues[id] = (noiseVal);
+}

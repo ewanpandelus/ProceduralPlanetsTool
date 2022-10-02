@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ece82a2fed330541992ed27a9ee0987, type: 3}
+  m_Name: RidgeFractal 1
+  m_EditorClassIdentifier: 
+  generateBiomes: 0
+  biomeNoiseSettings:
+  - amplitude: 4.6
+    frequency: 5.7
+    persistance: -0.03
+    lacunarity: 4.2
+    octaves: 3
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+  - amplitude: 3.12
+    frequency: 0.24
+    persistance: 0.26
+    lacunarity: 3.94
+    octaves: 10
+    active: 1
+    offset: {x: 7.24, y: 3.66, z: 0}
+  - amplitude: 1.4
+    frequency: 4.69
+    persistance: 2.16
+    lacunarity: 3.56
+    octaves: 3
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+  planetTextureCompute: {fileID: 7200000, guid: 1d0a55018c9f361449f3535b39791821, type: 3}
+  biomeCalculationCompute: {fileID: 7200000, guid: c899cbd51248ed64c9b7f8bd7e18e6a6, type: 3}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74803228c2695534f844545efb52a76b, type: 3}
+  m_Name: OceanPlanet
+  m_EditorClassIdentifier: 
+  planetRadius: 2
+  oceanDepthMultiplier: 0
+  mountainBlend: 5.11
+  power: 1.33
+  noiseLayers:
+  - amplitude: 0.16
+    frequency: 0.5
+    persistance: 0.3
+    lacunarity: 2.88
+    octaves: 3
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+    verticalShift: 0
+    minValue: 0
+  - amplitude: 0.06
+    frequency: 3
+    persistance: 0.5
+    lacunarity: 3.07
+    octaves: 10
+    active: 1
+    offset: {x: 2.73, y: 0, z: 0}
+    verticalShift: 0
+    minValue: 0
+  - amplitude: 3.6
+    frequency: 0.85
+    persistance: 0.52
+    lacunarity: 1
+    octaves: 1
+    active: 1
+    offset: {x: 1.38, y: 0, z: 0}
+    verticalShift: 0
+    minValue: 0
+  planetHeightCompute: {fileID: 7200000, guid: 5c1891ba70a72ba47bddc128b436afef, type: 3}

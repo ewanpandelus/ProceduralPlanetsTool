@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ece82a2fed330541992ed27a9ee0987, type: 3}
+  m_Name: OceanPlanet
+  m_EditorClassIdentifier: 
+  biomeNoiseSettings:
+  - amplitude: 0.59
+    frequency: 3.36
+    persistance: 2.6
+    lacunarity: 0.5
+    octaves: 3
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+  - amplitude: 1.53
+    frequency: 0.06
+    persistance: 0.35
+    lacunarity: 26.53
+    octaves: 4
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+  - amplitude: 59.99
+    frequency: 0.25
+    persistance: 1.23
+    lacunarity: 0.5
+    octaves: 3
+    active: 1
+    offset: {x: 0, y: 0, z: 0}
+  planetTextureCompute: {fileID: 7200000, guid: 1d0a55018c9f361449f3535b39791821, type: 3}
+  biomeCalculationCompute: {fileID: 7200000, guid: c899cbd51248ed64c9b7f8bd7e18e6a6, type: 3}

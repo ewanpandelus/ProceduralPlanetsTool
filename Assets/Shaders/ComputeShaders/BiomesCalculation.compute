@@ -1,0 +1,23 @@
+
+#pragma kernel CSMain
+
+StructuredBuffer<float> noiseValues;
+StructuredBuffer<float> maxMinValues;
+RWStructuredBuffer<float4> biomeMap;
+
+
+uint numVertices;
+float InverseLerp(float u, float v, float value)
+{
+	return saturate((value - u) / (v - u));
+}
+[numthreads(512,1,1)]
+void CSMain (uint id : SV_DispatchThreadID)
+{
+	
+	if (id >= numVertices) {
+		return;
+	}
+	float remapped = InverseLerp(maxMinValues[0], maxMinValues[1], noiseValues[id]);
+	biomeMap[id] = float4(remapped, remapped, remapped, remapped);
+}
