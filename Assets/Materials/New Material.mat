@@ -82,9 +82,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxDistance: 6.9482613
+    - _MaxDistance: 7.1152916
     - _Metallic: 0
-    - _MinDistance: 5.477896
+    - _MinDistance: 5.3327327
     - _Mode: 0
     - _NoiseMapScale: 1
     - _OcclusionStrength: 1
